@@ -25,10 +25,8 @@ config :phx_mdn, PhxMdnWeb.Endpoint,
   code_reloader: true,
   debug_errors: true,
   secret_key_base: "Jgw9YhXtVuEUSzivo9Uy6vwZ9oJ9vjOCelah7ERy/9YNWlVg4iRENS9pCqOIxDso",
-  watchers: [
-    esbuild: {Esbuild, :install_and_run, [:phx_mdn, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:phx_mdn, ~w(--watch)]}
-  ]
+  watchers: [vite: {PhoenixVite, :run, ["npx", ~w(vite dev), [cd: "assets"]]}],
+  static_url: [host: "localhost", port: 5173]
 
 # ## SSL Support
 #

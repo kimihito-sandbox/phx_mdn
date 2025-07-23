@@ -34,6 +34,7 @@ defmodule PhxMdn.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:phoenix_vite, "~> 0.2"},
       {:igniter, "~> 0.6", only: [:dev, :test]},
       {:phoenix, "~> 1.8.0-rc.4", override: true},
       {:phoenix_ecto, "~> 4.5"},
@@ -44,8 +45,6 @@ defmodule PhxMdn.MixProject do
       {:phoenix_live_view, "~> 1.1.0-rc.0"},
       {:lazy_html, ">= 0.1.0", only: :test},
       {:phoenix_live_dashboard, "~> 0.8.3"},
-      {:esbuild, "~> 0.10", runtime: Mix.env() == :dev},
-      {:tailwind, "~> 0.3", runtime: Mix.env() == :dev},
       {:heroicons,
        github: "tailwindlabs/heroicons",
        tag: "v2.2.0",
@@ -77,12 +76,10 @@ defmodule PhxMdn.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind phx_mdn", "esbuild phx_mdn"],
+      "assets.setup": ["cmd --cd assets npm install"],
+      "assets.build": ["cmd --cd assets npx vite build"],
       "assets.deploy": [
-        "tailwind phx_mdn --minify",
-        "esbuild phx_mdn --minify",
-        "phx.digest"
+        "assets.build"
       ]
     ]
   end
