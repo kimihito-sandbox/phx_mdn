@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "tidewave": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "http://localhost:4000/tidewave/mcp",
+        "--transport",
+        "sse"
+      ]
+    }
+  }
+}
